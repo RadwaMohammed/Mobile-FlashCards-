@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView,  StyleSheet} from 'react-native';
+import { Text, View, ScrollView,  StyleSheet, TouchableOpacity} from 'react-native';
 
 import { handleInitialData } from '../actions';
 
 import Deck from './Deck';
+
+import DeckDetails from './DeckDetails';
 
 
 
@@ -16,7 +18,7 @@ class DecksList extends Component {
     this.props.handleInitialData();
   }
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     console.log(decks);
     return (
       <ScrollView style={styles.container}>
@@ -25,9 +27,14 @@ class DecksList extends Component {
         {  
           decks.map(deck => { 
             return (
-              <View key={deck.title}>
-              <Deck title={deck.title} cards={deck.questions.length}/>
-              </View>
+              <TouchableOpacity
+                key={deck.title}
+                onPress={() =>
+                  navigation.navigate('DeckDetails', { title: deck.title })
+                }
+              >
+                <Deck title={deck.title} cards={deck.questions.length}/>
+            </TouchableOpacity>
             );
         })
        }
