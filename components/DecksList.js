@@ -17,18 +17,16 @@ class DecksList extends Component {
     console.log(decks);
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>Decks List</Text>
+        <Text style={styles.title}>Mobie FlashCards</Text>
         {  
           decks.map(deck => { 
             return (
-              <View  key={deck.title}>
+              <View key={deck.title}>
               <Deck title={deck.title} cards={deck.questions.length}/>
               </View>
             );
         })
        }
-      
-      <View style={{ marginBottom: 10 }} />
     </ScrollView>
     )
   }
@@ -41,7 +39,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     textAlign: 'center',
-
+    color:'#114e60',
+    marginBottom:25,
+    marginTop:40
   }
 });
 

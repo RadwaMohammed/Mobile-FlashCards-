@@ -23,7 +23,7 @@ export default function decks(state = {}, action) {
       return {
         ...state,
         [action.title]: {
-          title:[action.title],
+          title: action.title,
           questions: []
         }
       };
