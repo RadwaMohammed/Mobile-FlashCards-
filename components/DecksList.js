@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView,  StyleSheet} from 'react-native';
+
 import { handleInitialData } from '../actions';
+
 import Deck from './Deck';
+
 
 
 class DecksList extends Component {
@@ -18,6 +21,7 @@ class DecksList extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.title}>Mobie FlashCards</Text>
+        
         {  
           decks.map(deck => { 
             return (
@@ -27,14 +31,18 @@ class DecksList extends Component {
             );
         })
        }
+
     </ScrollView>
+    
     )
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    backgroundColor: '#f4eee8',
+    paddingLeft:30,
+    paddingRight:30
   },
   title: {
     fontSize: 30,
