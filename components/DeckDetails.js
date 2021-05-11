@@ -21,13 +21,13 @@ class DeckDetails extends Component {
   }
   render() {
     const { navigation, route } = this.props;
-    const { title, cards } = route.params;
+    const { title} = route.params;
     return (
       <View style={styles.deckContainer}>
-        <Deck title={title} cards={cards} />
+        <Deck title={title} />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('AddCard')}
+          onPress={() => navigation.navigate('AddCard', {title:title})}
         >
           <Text style={styles.btnText}>Add Card</Text>
         </TouchableOpacity>

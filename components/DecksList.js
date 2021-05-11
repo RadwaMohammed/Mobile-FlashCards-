@@ -16,7 +16,7 @@ class DecksList extends Component {
   }
   render() {
     const { decks, navigation } = this.props;
-    console.log(decks);
+
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.title}>Mobie FlashCards</Text>
@@ -28,12 +28,11 @@ class DecksList extends Component {
                 key={deck.title}
                 onPress={() =>
                   navigation.navigate('DeckDetails', { 
-                    title: deck.title, 
-                    cards: deck.questions.length 
+                    title: deck.title
                   })
                 }
               >
-                <Deck title={deck.title} cards={deck.questions.length}/>
+                <Deck title={deck.title} />
             </TouchableOpacity>
             );
         })

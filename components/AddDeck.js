@@ -12,7 +12,7 @@ class AddDeck extends Component {
     this.setState({ deckTitle });
   };
   handleSubmit = () => {
-    const { addDeck } = this.props;
+    const { addDeck, navigation } = this.props;
     const { deckTitle } = this.state;
     //Update Redux
     // Add the new deck to the store
@@ -20,6 +20,11 @@ class AddDeck extends Component {
     //Update DB
     // Save in AsyncStorage the new deck
     saveDeckTitle(deckTitle)
+    // Go to DeckDetails screen of the new deck
+    navigation.navigate('DeckDetails', {
+      title: deckTitle,
+      cards: 0
+    })
     // Reset the title
     this.setState(() => ({ deckTitle: '' }));
   };

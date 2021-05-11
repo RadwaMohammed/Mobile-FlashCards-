@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text, View, StyleSheet } from 'react-native';
 
-export default class Deck extends Component {
+class Deck extends Component {
 
   render() {
     const {title, cards} = this.props;
@@ -37,3 +38,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   }
 });
+/**
+ * The mapStateToProps function - get the state parts that Deck component needs
+ * @param {Object} state - The state of the store 
+ * @returns {object} An object containing decks {object} and
+ *                   
+ */
+const mapStateToProps = (state, {title}) => {
+  const deck = state[title];
+  const cards = deck ? deck.questions.length : null
+  return {
+    cards,
+  }
+  
+};
+
+export default connect(mapStateToProps)(Deck);
