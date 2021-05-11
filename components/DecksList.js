@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView,  StyleSheet, TouchableOpacity} from 'react-native';
+import { Text, ScrollView,  StyleSheet, TouchableOpacity} from 'react-native';
 
 import { handleInitialData } from '../actions';
-
 import Deck from './Deck';
-
-import DeckDetails from './DeckDetails';
 
 
 
@@ -30,7 +27,10 @@ class DecksList extends Component {
               <TouchableOpacity
                 key={deck.title}
                 onPress={() =>
-                  navigation.navigate('DeckDetails', { title: deck.title })
+                  navigation.navigate('DeckDetails', { 
+                    title: deck.title, 
+                    cards: deck.questions.length 
+                  })
                 }
               >
                 <Deck title={deck.title} cards={deck.questions.length}/>

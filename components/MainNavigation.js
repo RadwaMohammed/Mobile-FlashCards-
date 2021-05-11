@@ -5,6 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 import DecksList from './DecksList';
 import AddDeck from './AddDeck';
 import DeckDetails from './DeckDetails';
+import AddCard from './AddCard';
+import Quize from './Quize';
 
 // Config for TabNav
 const RouteConfigs = { 
@@ -63,15 +65,39 @@ const StackConfig = {
       headerStyle:{
         backgroundColor: '#114e60'
       },
-      title: "Deck Detail"
-    }
+      title: "Deck Details"
+    }, 
+  },
+  AddCard: {
+    name: "AddCard",
+    component: AddCard,
+    options: {
+      headerTintColor: '#f4eee8',
+      headerStyle:{
+        backgroundColor: '#114e60'
+      },
+      title: "Add Card"
+    },
+  },
+  Quize: {
+    name: "Quize",
+    component: Quize,
+    options: {
+      headerTintColor: '#f4eee8',
+      headerStyle:{
+        backgroundColor: '#114e60'
+      },
+      title: "Quize"
+    },
   }
-};
+}
 const Stack = createStackNavigator();
 const MainNav = () =>(
   <Stack.Navigator {...StackNavigatorConfig}>
     <Stack.Screen {...StackConfig['TabNav']} />
     <Stack.Screen {...StackConfig['DeckDetails']} />
+    <Stack.Screen {...StackConfig['AddCard']} />
+    <Stack.Screen {...StackConfig['Quize']} />
   </Stack.Navigator>
 )
 
