@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView,  StyleSheet, TouchableOpacity} from 'react-native';
-
 import { handleInitialData } from '../actions';
 import Deck from './Deck';
-
-
 
 class DecksList extends Component {
   componentDidMount() {
@@ -20,7 +17,6 @@ class DecksList extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.title}>Mobie FlashCards</Text>
-        
         {  
           decks.map(deck => { 
             return (
@@ -37,9 +33,7 @@ class DecksList extends Component {
             );
         })
        }
-
-    </ScrollView>
-    
+    </ScrollView> 
     )
   }
 }
@@ -62,7 +56,7 @@ const styles = StyleSheet.create({
 /**
  * The mapStateToProps function - get the state parts that DecksList component needs
  * @param {Object} state - The state of the store 
- * @returns {object} An object containing decks {object} and
+ * @returns {object} An object containing decks {object} 
  *                   
  */
 const mapStateToProps = (state) => ({

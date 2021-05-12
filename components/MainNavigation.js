@@ -6,14 +6,14 @@ import DecksList from './DecksList';
 import AddDeck from './AddDeck';
 import DeckDetails from './DeckDetails';
 import AddCard from './AddCard';
-import Quize from './Quize';
+import Quiz from './Quiz';
 
 // Config for TabNav
 const RouteConfigs = { 
   DecksList:{
-    name: "Decks List",
+    name: "DecksList",
     component: DecksList,
-    options: {tabBarIcon: ({color}) => <Entypo name="list" size={30} color={color} />, title: 'DecksList'}
+    options: {tabBarIcon: ({color}) => <Entypo name="list" size={30} color={color} />, title: 'Decks'}
   },
   AddDeck:{
     name: "AddDeck",
@@ -56,6 +56,17 @@ const StackConfig = {
     name: "Home",
     component: TabNav,
     options: {headerShown: false}
+  },
+  AddCard: {
+    name: "AddCard",
+    component: AddCard,
+    options: {
+      headerTintColor: '#f4eee8',
+      headerStyle:{
+        backgroundColor: '#114e60'
+      },
+      title: "Add Card"
+    },
   }, 
   DeckDetails: {
     name: "DeckDetails",
@@ -68,26 +79,15 @@ const StackConfig = {
       title: "Deck Details"
     }, 
   },
-  AddCard: {
-    name: "AddCard",
-    component: AddCard,
+  Quiz: {
+    name: "Quiz",
+    component: Quiz,
     options: {
       headerTintColor: '#f4eee8',
       headerStyle:{
         backgroundColor: '#114e60'
       },
-      title: "Add Card"
-    },
-  },
-  Quize: {
-    name: "Quize",
-    component: Quize,
-    options: {
-      headerTintColor: '#f4eee8',
-      headerStyle:{
-        backgroundColor: '#114e60'
-      },
-      title: "Quize"
+      title: "Quiz"
     },
   }
 }
@@ -95,9 +95,9 @@ const Stack = createStackNavigator();
 const MainNav = () =>(
   <Stack.Navigator {...StackNavigatorConfig}>
     <Stack.Screen {...StackConfig['TabNav']} />
-    <Stack.Screen {...StackConfig['DeckDetails']} />
     <Stack.Screen {...StackConfig['AddCard']} />
-    <Stack.Screen {...StackConfig['Quize']} />
+    <Stack.Screen {...StackConfig['DeckDetails']} />
+    <Stack.Screen {...StackConfig['Quiz']} />
   </Stack.Navigator>
 )
 

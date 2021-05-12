@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
  * The mapDispatchToProps function - used for dispatching actions to the store
  * @param {function} dispatch - Call store.dispatch to dispatch an action 
  * @returns {object} An object containing property its value is a function that
- *                   dispatch action returned by action creator <AddCard>
+ *                   dispatch action returned by action creator <addCardToDeck>
  */
 const mapDispatchToProps = dispatch => ({
   addCardToDeck: (title, card) => dispatch(addCardToDeck(title, card))

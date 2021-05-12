@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 /**
  * The mapStateToProps function - get the state parts that Deck component needs
  * @param {Object} state - The state of the store 
- * @returns {object} An object containing decks {object} and
+ * @returns {object} An object containing cards {number} the card's count in the deck
  *                   
  */
 const mapStateToProps = (state, {title}) => {
@@ -50,7 +50,5 @@ const mapStateToProps = (state, {title}) => {
   return {
     cards,
   }
-  
 };
-
 export default connect(mapStateToProps)(Deck);

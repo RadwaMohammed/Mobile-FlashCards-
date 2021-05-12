@@ -1,10 +1,11 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { setLocalNotification } from './utils/api';
 import reducer from './reducers';
 import middleware from './middleware';
 import MainNav from './components/MainNavigation';
@@ -14,6 +15,9 @@ import MainNav from './components/MainNavigation';
 const store = createStore(reducer, middleware);
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       /*

@@ -7,7 +7,11 @@ import Deck from './Deck';
 
 
 class DeckDetails extends Component {
-  handleRemoval=() =>{
+  
+  /**
+   * Handle remove deck
+   */
+  handleRemoval = () =>{
     const { navigation, route, removeDeck } = this.props;
     const { title } = route.params;
     //Update Redux
@@ -17,8 +21,8 @@ class DeckDetails extends Component {
     // Remove Deck from AsyncStorage
     remove(title);
     navigation.goBack();
-
   }
+
   render() {
     const { navigation, route } = this.props;
     const { title} = route.params;
@@ -33,9 +37,9 @@ class DeckDetails extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Quize')}
+          onPress={() => navigation.navigate('Quiz', {title:title})}
         >
-          <Text style={styles.btnText}>Start Quize</Text>
+          <Text style={styles.btnText}>Start Quiz</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.removeBtn}

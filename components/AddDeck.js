@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, StyleSheet, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { addDeck } from '../actions'
 import { saveDeckTitle } from '../utils/api.js'
 
@@ -8,12 +8,26 @@ class AddDeck extends Component {
   state = {
     deckTitle: ''
   };
+
   handleChange = deckTitle => {
     this.setState({ deckTitle });
   };
+
   handleSubmit = () => {
-    const { addDeck, navigation } = this.props;
+    const { addDeck, navigation, decksTitles } = this.props;
     const { deckTitle } = this.state;
+    // Make sure the deck's name not duplicated
+    if (decksTitles.includes(deckTitle.toLocaleLowerCase())) {
+      Alert.alert(
+        "This deck is already Exist",
+        "Please add a different deck.",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
+      this.setState(() => ({ deckTitle: '' }));
+      return;
+    }
+    
     //Update Redux
     // Add the new deck to the store
     addDeck(deckTitle);
@@ -87,7 +101,16 @@ const styles = StyleSheet.create({
   }
 });
 
-
+/**
+ * The mapStateToProps function - get the state parts that AddDeck component needs
+ * @param {Object} state - The state of the store 
+ * @returns {object} An object containing decksTitles {array} all the titles
+ *                   
+ */
+const mapStateToProps = (state) => ({
+  decksTitles: Object.keys(state).map(title => title.toLocaleLowerCase())
+  
+});
 
 /**
  * The mapDispatchToProps function - used for dispatching actions to the store
@@ -101,4 +124,4 @@ const mapDispatchToProps = dispatch => ({
 /* Using the connect() function to make container component
    to read state from the store and dispatch actions
 */
-export default connect(null, mapDispatchToProps)(AddDeck);
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
