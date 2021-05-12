@@ -1,4 +1,4 @@
-import { getDecks } from '../utils/api';
+import { getDecks ,resetDecks} from '../utils/api';
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK';
@@ -61,6 +61,7 @@ export function addCardToDeck(title, card) {
  * using redux-thunk pattern because we want to make asynchronous request
  */
 export function handleInitialData() {
+  // resetDecks()
   return async dispatch => {
     const decks = await getDecks();
     // Add decks to the state of the store

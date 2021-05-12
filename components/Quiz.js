@@ -30,18 +30,19 @@ class Quiz extends Component {
   handleCorrect = () => {
     const {questionIndex} = this.state;
     const {deck} = this.props;
-    // If the user answer all question show result part
-    if (questionIndex + 1 === deck.questions.length) {
-      return this.setState(prevState => ({
-        showResult: !prevState.showResult
-      }));
-    }
     // Increase the score for the correct answer
     this.setState(prevState => ({
       score: prevState.score + 1,
       questionIndex: prevState.questionIndex + 1,
       showAnswer: !prevState.showAnswer
     }));
+    // If the user answer all question show result part
+    if (questionIndex + 1 === deck.questions.length) {
+      return this.setState(prevState => ({
+        showResult: !prevState.showResult
+      }));
+    }
+    
   }
   /**
    * Handle Incorrct answers
@@ -49,16 +50,17 @@ class Quiz extends Component {
   handleInCorrect = () => {
     const {questionIndex} = this.state;
     const {deck} = this.props;
+    this.setState(prevState => ({
+      questionIndex: prevState.questionIndex + 1,
+      showAnswer: !prevState.showAnswer
+    }));
     // If the user answer all question show result component
     if (questionIndex + 1 === deck.questions.length) {
       return this.setState(prevState => ({
         showResult: !prevState.showResult
       }));
     }
-    this.setState(prevState => ({
-      questionIndex: prevState.questionIndex + 1,
-      showAnswer: !prevState.showAnswer
-    }));
+    
   }
 
   /***** Result component functions *****/
@@ -87,7 +89,7 @@ class Quiz extends Component {
       showAnswer: false,
       showResult: false
     });
-    navigation.goBack();
+    navigation.navigate('Quiz');
   }
 
 
@@ -144,8 +146,17 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>{deck.title} Quiz</Text>
-        <Text style={styles.cards}>{questionIndex + 1} / {deck.questions.length}</Text>
-        { this.renderElement()}
+        <View>
+          { questionIndex + 1 > deck.questions.length 
+            ? <Text style={styles.cards}>
+                Results
+            </Text>
+            : <Text style={styles.cards}>
+                {questionIndex + 1} / {deck.questions.length}
+              </Text>
+          }
+        </View>
+        { this.renderElement() }
       </View>
     )
   }
