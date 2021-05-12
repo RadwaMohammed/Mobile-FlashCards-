@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Notifications, Permissions } from 'expo';
-
+import { Permissions } from 'expo';
+// import * as Permissions from 'expo-permissions'; 
+import * as Notifications from 'expo-notifications';
 
 // Key for notification
 const NOTIFICATION_KEY = 'FlashCards:notifications';
@@ -150,6 +151,13 @@ export async function resetDecks() {
 
 // Setting Notification
 
+// Clear notification
+export function clearLocalNotification() {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY)
+    .then(Notifications.cancelAllScheduledNotificationsAsync)
+}
+
+// Represent the notification
 function createNotification () {
   return {
     title: 'Hello from Mobile FlashCard!',
@@ -166,31 +174,29 @@ function createNotification () {
   }
 }
 
-export function clearLocalNotification () {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
-}
-
 export function setLocalNotification () {
+  // To check if we set a localNotification 
+  // not to set another one
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {
+      // if we havn't set a localNotification
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
           .then(({ status }) => {
             if (status === 'granted') {
-              Notifications.cancelAllScheduledNotificationsAsync()
+              Notifications.cancelAllScheduledNotificationsAsync();
 
               let tomorrow = new Date()
               tomorrow.setDate(tomorrow.getDate() + 1)
-              tomorrow.setHours(20)
+              tomorrow.setHours(20) // at 8 o'clock
               tomorrow.setMinutes(0)
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
                 {
                   time: tomorrow,
-                  repeat: 'day',
+                  repeat: 'day', // repeate daily
                 }
               )
 

@@ -15,7 +15,7 @@ import MainNav from './components/MainNavigation';
 const store = createStore(reducer, middleware);
 
 export default class App extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     setLocalNotification();
   }
   render() {

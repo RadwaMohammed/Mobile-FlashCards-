@@ -13,6 +13,7 @@ class Quiz extends Component {
   // set new notification 
   componentDidMount() {
     clearLocalNotification().then(setLocalNotification);
+   
   }
 
   state = {
