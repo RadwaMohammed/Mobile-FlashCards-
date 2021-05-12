@@ -18,17 +18,16 @@ class AddCard extends Component {
   };
   handleSubmit = () => {
     const { addCardToDeck, navigation, route } = this.props;
-    const { title, cards } = route.params;
+    const { title } = route.params;
     const { question, answer } = this.state;
     //Update Redux
     // Add the new deck to the store
-    addCardToDeck(title, {[question]: answer});
+    addCardToDeck(title, {question: question, answer: answer});
     //Update DB
     // Save in AsyncStorage the new card
-    addCard(title, {[question]: answer})
+    addCard(title, {question: question, answer: answer})
     // Go to the deck screen
-    let x = cards + 1;
-    navigation.goBack({title: title, cards:x });
+    navigation.goBack({title: title });
     // Reset the title
     this.setState(() => ({ question: '', answer: '' }));
   };
