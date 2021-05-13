@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { clearLocalNotification } from '../utils/api';
+import { clearLocalNotification, setLocalNotification } from '../utils/api';
 
 class Result extends Component {
    // user has completed at least one quiz for today
   // reset notification 
   componentDidMount() {
-    clearLocalNotification();
+    clearLocalNotification().then(setLocalNotification);
   }
   render() {
     const { result, questionsCount, backHome, startAgain} = this.props;
