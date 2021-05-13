@@ -33,3 +33,7 @@ Steps to setup the project:
 - [React Redux](https://react-redux.js.org/)
 - [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
 - [Node.js](https://nodejs.org/en/)
+
+## Author
+
+[Radwa El-ganady](https://github.com/RadwaMohammed)
