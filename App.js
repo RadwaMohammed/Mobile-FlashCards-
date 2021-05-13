@@ -17,7 +17,7 @@ import { name as appName } from './app.json';
 const store = createStore(reducer, middleware);
 
 export default class App extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     setLocalNotification();
   }
   render() {

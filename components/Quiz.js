@@ -8,13 +8,11 @@ import Question from './Question';
 
 
 class Quiz extends Component {
-  // user has completed at least one quiz for today
-  // reset notification 
-  // set new notification 
-  componentDidMount() {
-    clearLocalNotification().then(setLocalNotification);
+ 
+  // componentDidMount() {
+    
    
-  }
+  // }
 
   state = {
     questionIndex: 0,
@@ -119,6 +117,10 @@ class Quiz extends Component {
         showAnswer={this.showAnswer} 
       />
     } else {
+      // user has completed at least one quiz for today
+        // reset notification 
+        // set new notification 
+      clearLocalNotification().then(setLocalNotification);
       return <Answer 
         answer={deck.questions[questionIndex].answer} 
         handleCorrect={this.handleCorrect}
