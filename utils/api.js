@@ -1,8 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Permissions } from 'expo';
-// import * as Permissions from 'expo-permissions'; 
+import * as Permissions from 'expo-permissions';
 import * as Notifications from 'expo-notifications';
-
 // Key for notification
 const NOTIFICATION_KEY = 'FlashCards:notifications';
 
@@ -157,24 +155,7 @@ export function clearLocalNotification() {
     .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
-// Represent the notification
-function createNotification () {
-  return {
-    title: 'Hello from Mobile FlashCard!',
-    body: "👋 Don't forget to study for today!!",
-    ios: {
-      sound: true,
-    },
-    android: {
-      sound: true,
-      priority: 'high',
-      sticky: false,
-      vibrate: true,
-    }
-  }
-}
-
-export function setLocalNotification () {
+export function setLocalNotification() {
   // To check if we set a localNotification 
   // not to set another one
   AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -186,20 +167,29 @@ export function setLocalNotification () {
           .then(({ status }) => {
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync();
-
-              let tomorrow = new Date()
-              tomorrow.setDate(tomorrow.getDate() + 1)
-              tomorrow.setHours(20) // at 8 o'clock
-              tomorrow.setMinutes(0)
-
-              Notifications.scheduleLocalNotificationAsync(
-                createNotification(),
-                {
-                  time: tomorrow,
-                  repeat: 'day', // repeate daily
-                }
-              )
-
+              Notifications.setNotificationHandler({
+                handleNotification: async () => ({
+                  shouldPlaySound: true,
+                  shouldShowAlert: true,
+                  shouldSetBadge: false
+                })
+              })
+              
+              //create a date object to trigger the notification
+              let tomorrow = new Date()  
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              tomorrow.setHours(20);
+              tomorrow.setMinutes(0);
+              // tomorrow = tomorrow.getTime() + ( 20 *1000);
+              const notificationDate = new Date(tomorrow)
+              Notifications.scheduleNotificationAsync({
+                content: {
+                  title: 'Hello from Mobile FlashCard!',
+                  body: "👋 Don't forget to study for today!!",
+                },
+                trigger : notificationDate,
+                repeats: true
+              })
               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
             }
           })

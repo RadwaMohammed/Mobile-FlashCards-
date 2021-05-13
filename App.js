@@ -6,7 +6,7 @@ import { AppRegistry } from 'react-native';
 import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { setLocalNotification } from './utils/api';
+import { setLocalNotification, clearLocalNotification } from './utils/api';
 import reducer from './reducers';
 import middleware from './middleware';
 import MainNav from './components/MainNavigation';
@@ -18,8 +18,9 @@ const store = createStore(reducer, middleware);
 
 export default class App extends Component {
   componentDidMount() {
-    setLocalNotification();
+    clearLocalNotification().then(setLocalNotification);
   }
+  
   render() {
     return (
       /*

@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { clearLocalNotification } from '../utils/api';
 
-export default function Result(props) {
-  const { result, questionsCount, backHome, startAgain} = props;
-  const percent = (result / questionsCount) * 100;
-  return (
-    <View style={styles.container}>
+class Result extends Component {
+   // user has completed at least one quiz for today
+  // reset notification 
+  componentDidMount() {
+    clearLocalNotification();
+  }
+  render() {
+    const { result, questionsCount, backHome, startAgain} = this.props;
+    const percent = (result / questionsCount) * 100;
+    return (
+      <View style={styles.container}>
       <Text style={styles.title}>Quiz Complete</Text>
       <Text style={styles.score}>You got { result } / { questionsCount} correct - ({ percent }%)</Text>
       <TouchableOpacity
@@ -21,7 +28,8 @@ export default function Result(props) {
         <Text style={styles.btnText}>Go to Decks List</Text>
       </TouchableOpacity>
     </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -61,3 +69,4 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 })
+ export default Result;

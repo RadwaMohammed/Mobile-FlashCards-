@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { removeDeck } from '../actions/index';
 import { removeDeck as remove } from '../utils/api';
 import Deck from './Deck';
@@ -20,7 +20,7 @@ class DeckDetails extends Component {
     // Update DB
     // Remove Deck from AsyncStorage
     remove(title);
-    navigation.goBack();
+    navigation.navigate('DecksList');
   }
 
   render() {

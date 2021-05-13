@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import { clearLocalNotification, setLocalNotification } from '../utils/api';
 import Answer from './Answer';
 import Result from './Result';
 import Question from './Question';
 
 
 class Quiz extends Component {
-  // user has completed at least one quiz for today
-  // reset notification 
-  // set new notification 
-  componentDidMount() {
-    clearLocalNotification().then(setLocalNotification);
-  }
-
   state = {
     questionIndex: 0,
     score: 0,
